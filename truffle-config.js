@@ -8,6 +8,7 @@ const mnemonic = fs.readFileSync(".secret").toString().trim();
 }
 
 module.exports = {
+  contracts_build_directory: path.join(__dirname, "app/src/contracts"),
 
   networks: {
     develop: {
