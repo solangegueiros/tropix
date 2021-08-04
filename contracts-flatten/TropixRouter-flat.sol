@@ -1,83 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.4;
 
-// File: @openzeppelin\contracts\token\ERC20\IERC20.sol
-
-/**
- * @dev Interface of the ERC20 standard as defined in the EIP.
- */
-interface IERC20 {
-    /**
-     * @dev Returns the amount of tokens in existence.
-     */
-    function totalSupply() external view returns (uint256);
-
-    /**
-     * @dev Returns the amount of tokens owned by `account`.
-     */
-    function balanceOf(address account) external view returns (uint256);
-
-    /**
-     * @dev Moves `amount` tokens from the caller's account to `recipient`.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {Transfer} event.
-     */
-    function transfer(address recipient, uint256 amount) external returns (bool);
-
-    /**
-     * @dev Returns the remaining number of tokens that `spender` will be
-     * allowed to spend on behalf of `owner` through {transferFrom}. This is
-     * zero by default.
-     *
-     * This value changes when {approve} or {transferFrom} are called.
-     */
-    function allowance(address owner, address spender) external view returns (uint256);
-
-    /**
-     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * IMPORTANT: Beware that changing an allowance with this method brings the risk
-     * that someone may use both the old and the new allowance by unfortunate
-     * transaction ordering. One possible solution to mitigate this race
-     * condition is to first reduce the spender's allowance to 0 and set the
-     * desired value afterwards:
-     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
-     *
-     * Emits an {Approval} event.
-     */
-    function approve(address spender, uint256 amount) external returns (bool);
-
-    /**
-     * @dev Moves `amount` tokens from `sender` to `recipient` using the
-     * allowance mechanism. `amount` is then deducted from the caller's
-     * allowance.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {Transfer} event.
-     */
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-
-    /**
-     * @dev Emitted when `value` tokens are moved from one account (`from`) to
-     * another (`to`).
-     *
-     * Note that `value` may be zero.
-     */
-    event Transfer(address indexed from, address indexed to, uint256 value);
-
-    /**
-     * @dev Emitted when the allowance of a `spender` for an `owner` is set by
-     * a call to {approve}. `value` is the new allowance.
-     */
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-}
-
-// File: node_modules\@openzeppelin\contracts\utils\Context.sol
+// File: contracts\oz\utils\Context.sol
 
 /*
  * @dev Provides information about the current execution context, including the
@@ -100,8 +24,9 @@ abstract contract Context {
     }
 }
 
-// File: node_modules\@openzeppelin\contracts\utils\Strings.sol
+// File: contracts\oz\utils\Strings.sol
 
+pragma solidity ^0.8.0;
 
 /**
  * @dev String operations.
@@ -167,8 +92,9 @@ library Strings {
 
 }
 
-// File: node_modules\@openzeppelin\contracts\utils\introspection\IERC165.sol
+// File: contracts\oz\utils\introspection\IERC165.sol
 
+pragma solidity ^0.8.0;
 
 /**
  * @dev Interface of the ERC165 standard, as defined in the
@@ -191,8 +117,9 @@ interface IERC165 {
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
 
-// File: node_modules\@openzeppelin\contracts\utils\introspection\ERC165.sol
+// File: contracts\oz\utils\introspection\ERC165.sol
 
+pragma solidity ^0.8.0;
 
 
 /**
@@ -218,9 +145,10 @@ abstract contract ERC165 is IERC165 {
     }
 }
 
-// File: node_modules\@openzeppelin\contracts\access\AccessControl.sol
 
+// File: contracts\oz\access\AccessControl.sol
 
+pragma solidity ^0.8.0;
 
 /**
  * @dev External interface of AccessControl declared to support ERC165 detection.
@@ -458,9 +386,10 @@ abstract contract AccessControl is Context, IAccessControl, ERC165 {
     }
 }
 
-// File: node_modules\@openzeppelin\contracts\utils\structs\EnumerableSet.sol
 
+// File: contracts\oz\utils\structs\EnumerableSet.sol
 
+pragma solidity ^0.8.0;
 
 /**
  * @dev Library for managing
@@ -756,11 +685,10 @@ library EnumerableSet {
     }
 }
 
-// File: @openzeppelin\contracts\access\AccessControlEnumerable.sol
 
+// File: contracts\oz\access\AccessControlEnumerable.sol
 
-
-
+pragma solidity ^0.8.0;
 
 /**
  * @dev External interface of AccessControlEnumerable declared to support ERC165 detection.
@@ -843,10 +771,10 @@ abstract contract AccessControlEnumerable is IAccessControlEnumerable, AccessCon
     }
 }
 
-// File: contracts\ERC1155\IERC1155.sol
 
+// File: contracts\oz\token\ERC1155\IERC1155.sol
 
-
+pragma solidity ^0.8.0;
 
 /**
  * @dev Required interface of an ERC1155 compliant contract, as defined in the
@@ -946,9 +874,10 @@ interface IERC1155 is IERC165 {
     function safeBatchTransferFrom(address from, address to, uint256[] calldata ids, uint256[] calldata amounts, bytes calldata data) external;
 }
 
-// File: contracts\ERC1155\presets\IERC1155PresetMinterPauser.sol
 
+// File: contracts\ERC1155\IERC1155PresetMinterPauser.sol
 
+pragma solidity ^0.8.0;
 
 interface IERC1155PresetMinterPauser is IERC1155 {
     function burn(address account, uint256 id, uint256 value) external;
@@ -960,16 +889,47 @@ interface IERC1155PresetMinterPauser is IERC1155 {
     function unpause() external;
 }
 
-// File: contracts\ITropNFT.sol
 
+// File: contracts\ITropixNFT.sol
+pragma solidity 0.8.4;
 
-interface ITropNFT is IERC1155PresetMinterPauser {
+interface ITropixNFT is IERC1155PresetMinterPauser {
   function move(address from, address to, uint256 id, uint256 amount, bytes calldata data) external;
   function moveBatch(address from, address to, uint256[] calldata ids, uint256[] calldata amounts, bytes calldata data) external;
 }
 
 
-// File: contracts\TropRouter.sol
+// File: contracts\ITropixERC20.sol
+
+pragma solidity 0.8.4;
+
+// Oken ControlledToken
+//import './ERC20/IControlledToken.sol';  
+
+interface ITropixERC20 {
+  function totalSupply() external view returns (uint256);
+  function balanceOf(address account) external view returns (uint256);
+  function transfer(address recipient, uint256 amount) external returns (bool);
+  function allowance(address owner, address spender) external view returns (uint256);
+  function approve(address spender, uint256 amount) external returns (bool);
+  function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+
+  event Transfer(address indexed from, address indexed to, uint256 value);
+  event Approval(address indexed owner, address indexed spender, uint256 value);
+
+  function mint(address _to, uint256 _amount) external returns (bool); 
+  function forcedTransfer(address _from, address _to, uint256 _value) external returns (bool);
+  function forcedBurn(address _who, uint256 _value) external returns (bool);
+  function addBurner(address _address) external;
+  function addMinter(address _address) external;
+  function addOperator(address _address) external;
+}
+
+
+// File: contracts\TropixRouter.sol
+pragma solidity 0.8.4;
+
+// version 0.3.0
 
 contract TropixRouter is AccessControlEnumerable {
 
@@ -977,39 +937,41 @@ contract TropixRouter is AccessControlEnumerable {
   uint256 public constant decimalpercent = 1000000; //100.0000 = percentage accuracy (4) to 100%
   uint256 public constant maxValue = type(uint256).max / decimalpercent;  
 
-  IERC20 public tropETH;
-  ITropNFT public tropNFT;
+  ITropixERC20 public tropixETH;
+  ITropixNFT public tropixNFT;
 
   constructor(address erc20Address, address nftAddress) {
     _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
     _setupRole(ADMIN_ROLE, _msgSender());
 
-    tropETH = IERC20(erc20Address);
-    tropNFT = ITropNFT(nftAddress);
+    tropixETH = ITropixERC20(erc20Address);
+    tropixNFT = ITropixNFT(nftAddress);
   }
 
   function mintNFT(address to, uint256 id, uint256 amount, bytes memory data) public {
     //require(!idExists[id], "id exists");
     //idList.push(id);
-    tropNFT.mint(to, id, amount, data);
+    tropixNFT.mint(to, id, amount, data);
     //idExists[id] = true;
   }
 
   /**
-    * @dev msg.sender should have already given the PaymentSplitter an allowance of at least value to split on token.
-    * This contract must be tropNFT operator
+    * @dev this works only for Oken ERC20, to use forcedTransfer
+    * it is possible to transfer directly from buyer without do an approve for Router on token.
+    * This contract must be tropixERC20 operator
+    * This contract must be tropixNFT operator
     */
   function split (uint256 idNFT, uint256 amountNFT, uint256 value, address buyer, address seller, address[] memory tos, uint256[] memory shares) public {
-    require(tos.length == shares.length, "PaymentSplitter: tos and shares length mismatch");
-    require(tos.length > 0, "PaymentSplitter: no destinataries");
-    require(value > 0, "PaymentSplitter: zero value");
-    require(value <= maxValue, "PaymentSplitter: value overflow");
+    require(tos.length == shares.length, "TropixRouter: tos and shares length mismatch");
+    require(tos.length > 0, "TropixRouter: no destinataries");
+    require(value > 0, "TropixRouter: zero value");
+    require(value <= maxValue, "TropixRouter: value overflow");
 
     uint256 totalShare = 0;
     for (uint256 i = 0; i < shares.length; i++) {
       totalShare += shares[i];
     }
-    require(totalShare == decimalpercent, "PaymentSplitter: totalShare is NOT 100");
+    require(totalShare == decimalpercent, "TropixRouter: totalShare is NOT 100");
 
     safeTransferFrom(buyer, address(this), value);
 
@@ -1024,29 +986,29 @@ contract TropixRouter is AccessControlEnumerable {
     //To prevent any balance remaining in the contract
     safeTransfer(tos[0], (value - totalSent));
 
-    tropNFT.move(seller, buyer, idNFT, amountNFT, "" );
+    tropixNFT.move(seller, buyer, idNFT, amountNFT, "" );
   }
 
   function safeTransfer(address to, uint value) internal {
     // bytes4(keccak256(bytes('transfer(address,uint256)')));
-    (bool success, bytes memory data) = address(tropETH).call(abi.encodeWithSelector(0xa9059cbb, to, value));
-    require(success && (data.length == 0 || abi.decode(data, (bool))), 'TropRouter: safeTransfer failed');
+    (bool success, bytes memory data) = address(tropixETH).call(abi.encodeWithSelector(0xa9059cbb, to, value));
+    require(success && (data.length == 0 || abi.decode(data, (bool))), 'TropixRouter: safeTransfer failed');
   }
 
   function safeTransferFrom(address from, address to, uint value) internal {
-    // bytes4(keccak256(bytes('transferFrom(address,address,uint256)')));
-    (bool success, bytes memory data) = address(tropETH).call(abi.encodeWithSelector(0x23b872dd, from, to, value));
-    require(success && (data.length == 0 || abi.decode(data, (bool))), 'TropRouter: safeTransferFrom failed');
+    // bytes4(keccak256(bytes('forcedTransfer(address,address,uint256)')));
+    (bool success, bytes memory data) = address(tropixETH).call(abi.encodeWithSelector(0x9fc1d0e7, from, to, value));
+    require(success && (data.length == 0 || abi.decode(data, (bool))), 'TropixRouter: safeForcedTransfer failed');
   }
 
-  function updateTropETH(address erc20Address) public {
-    require(hasRole(ADMIN_ROLE, _msgSender()), "TropRouter: must have admin role to updateTropETH");
-    tropETH = IERC20(erc20Address);
+  function updateTropixETH(address erc20Address) public {
+    require(hasRole(ADMIN_ROLE, _msgSender()), "TropixRouter: must have admin role to updateTropixETH");
+    tropixETH = ITropixERC20(erc20Address);
   }
 
-  function updateTropNFT(address nftAddress) public {
-    require(hasRole(ADMIN_ROLE, _msgSender()), "TropRouter: must have admin role to updateTropNFT");
-    tropNFT = ITropNFT(nftAddress);
+  function updateTropixNFT(address nftAddress) public {
+    require(hasRole(ADMIN_ROLE, _msgSender()), "TropixRouter: must have admin role to updateTropixNFT");
+    tropixNFT = ITropixNFT(nftAddress);
   }
 
 }
